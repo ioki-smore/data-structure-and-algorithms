@@ -15,6 +15,8 @@
 
 #define ds(type) __attribute_maybe_unused__ inline type
 
+#define abbr(prefix, type, name, suffix) prefix##_##type##_##name##suffix
+
 #define ElemType char
 
 typedef int Int;

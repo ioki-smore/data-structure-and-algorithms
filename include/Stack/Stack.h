@@ -1,12 +1,9 @@
-//
-// Created by Administrator on 2023/7/29.
-//
-
 #ifndef DATASTRUCTURE_STACK_H
 #define DATASTRUCTURE_STACK_H
 
 #include "config.h"
 
+/* STACK */
 #define STACK(type, size) \
 DEFINE_stack(type, size)  \
 IMPLEMENT_stack_operation(type, size)
@@ -15,11 +12,12 @@ IMPLEMENT_stack_operation(type, size)
 DEFINE_link_stack        \
 IMPLEMENT_link_stack_operation(type);
 
+/* DEFINE */
 #define DEFINE_stack(type, size) \
 typedef struct {                 \
     type data[size];             \
     int top;                     \
-} Sq##_##type##_##Stack;
+} abbr(Sq, type, Stack,);
 
 #define DEFINE_link_stack(type) \
 typedef struct LinkNode {       \
@@ -27,24 +25,25 @@ typedef struct LinkNode {       \
     struct LinkNode *next;      \
 } *LiStack;
 
+/* IMPLEMENT */
 #define IMPLEMENT_stack_operation(type, size) \
-ds(void) Init##type##Stack(Sq##_##type##_##Stack *S) { \
+ds(void) Init##type##Stack(abbr(Sq, type, Stack,) *S) { \
          S->top = -1;                         \
 }                                             \
-ds(bool) type##StackEmpty(Sq##_##type##_##Stack S) {   \
+ds(bool) type##StackEmpty(abbr(Sq, type, Stack,) S) {   \
     return (S.top == -1);                     \
 }                                             \
-ds(bool) Push##type(Sq##_##type##_##Stack *S, type elem) { \
+ds(bool) Push##type(abbr(Sq, type, Stack,) *S, type elem) { \
     if (S->top == size - 1) return false;     \
     S->data[++S->top] = elem;                 \
     return true;                              \
 }                                             \
-ds(bool) Pop##type(Sq##_##type##_##Stack *S, type *elem) { \
+ds(bool) Pop##type(abbr(Sq, type, Stack,) *S, type *elem) { \
     if (S->top == -1) return false;           \
     *elem = S->data[S->top--];                \
     return true;                              \
 }                                             \
-ds(bool) Get##type##StackTop(Sq##_##type##_##Stack S, type *elem) { \
+ds(bool) Get##type##StackTop(abbr(Sq, type, Stack,) S, type *elem) { \
     if (S.top == -1) return false;            \
     *elem = S.data[S.top];                    \
     return true;                              \

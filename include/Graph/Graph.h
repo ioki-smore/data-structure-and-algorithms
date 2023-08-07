@@ -11,31 +11,38 @@ typedef char VertexType;
 //typedef char InfoType;
 typedef int EdgeType;
 
-typedef struct {
-    VertexType Vex[MaxVertexNum];
-    EdgeType Edge[MaxVertexNum][MaxVertexNum];
-    int vex_num, arc_num;
-} MGraph;
+/* GRAPH */
+
+#define ADJACENCY_MATRIX_GRAPH(v, e, size)  DEFINE_adjacency_matrix_graph(v, e, size)
 
 #define ADJACENCY_LIST_GRAPH(size) \
 DEFINE_adjacency_list_graph(size)  \
 IMPLEMENT_adjacency_list_graph_operation(size)
 
+/* DEFINE */
+#define DEFINE_adjacency_matrix_graph(v, e, size) \
+typedef struct {                                  \
+    v abbr(M, v, Vex,)[size];                     \
+    e abbr(M, e, Edge,)[size][size];              \
+    int vex_num, arc_num;                         \
+} abbr(M, v##_##e, Graph,);
+
 #define DEFINE_adjacency_list_graph(size) \
-typedef struct ArcNode {     \
-    int adj_vex;             \
-    struct ArcNode *next;    \
-    /* InfoType info; */     \
-} ArcNode;                   \
-typedef struct VNode {       \
-    VertexType data;         \
-    ArcNode *first;          \
-} VNode, AdjList[size]; \
-typedef struct {             \
-    AdjList vertices;        \
-    int vex_num, arc_num;    \
+typedef struct ArcNode {                  \
+    int adj_vex;                          \
+    struct ArcNode *next;                 \
+    /* InfoType info; */                  \
+} ArcNode;                                \
+typedef struct VNode {                    \
+    VertexType data;                      \
+    ArcNode *first;                       \
+} VNode, AdjList[size];                   \
+typedef struct {                          \
+    AdjList vertices;                     \
+    int vex_num, arc_num;                 \
 } ALGraph;
 
+/* IMPLEMENT */
 #define IMPLEMENT_adjacency_list_graph_operation(size) \
 ds(bool) Adjacent(ALGraph G, int x, int y);      \
 ds(ArcNode *)Neighbors(ALGraph G, int x);        \

@@ -5,7 +5,7 @@
 
 typedef struct {
     ElemType data;
-    int next
+    int next;
 } SLinkList[MaxSize];
 
 #endif //DATASTRUCTURE_STATICLINKEDLIST_H

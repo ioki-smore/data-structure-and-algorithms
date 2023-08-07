@@ -5,6 +5,7 @@
 
 #define MAXLEN 255
 
+/* STRING */
 #define STRING(size) \
 DEFINE_string(size)  \
 IMPLEMENT_string_operation
@@ -13,6 +14,7 @@ IMPLEMENT_string_operation
 DEFINE_heap_string            \
 IMPLEMENT_heap_string_operation
 
+/* DEFINE */
 #define DEFINE_string(size) \
 typedef struct {            \
     char ch[size];        \
@@ -25,6 +27,7 @@ typedef struct {           \
     int length;            \
 } HString;
 
+/* IMPLEMENT */
 #define IMPLEMENT_string_operation \
 ds(bool) StrAssign(SString *T, char chars); \
 ds(bool) StrCopy(SString *T, SString S);    \

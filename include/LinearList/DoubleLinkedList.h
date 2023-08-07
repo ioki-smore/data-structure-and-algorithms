@@ -3,26 +3,29 @@
 
 #include "config.h"
 
+/* DOUBLE LINKED LIST */
 #define DOUBLE_LINKED_LIST(type) \
 DEFINE_double_link_list(type)  \
 IMPLEMENT_double_link_list(type)
 
+/* DEFINE */
 #define DEFINE_double_link_list(type) \
-typedef struct DNode {          \
-    type data;                  \
-    struct DNode *prior, *next; \
-} D##_##type##_##Node, *D##_##type##_##Linklist;
+typedef struct abbr(D, type, Node,) { \
+    type data;                        \
+    struct abbr(D, type, Node,) *prior, *next; \
+} abbr(D, type, Node,), *abbr(D, type, Linklist,);
 
+/* IMPLEMENT */
 #define IMPLEMENT_double_link_list(type) \
-ds(bool) D##Insert##type(D##_##type##_##Node *p, D##_##type##_##Node *s) { \
+ds(bool) D##Insert##type(abbr(D, type, Node,) *p, abbr(D, type, Node,) *s) { \
     s->next = p->next;                   \
     p->next->prior = s;                  \
     s->prior = p;                        \
     p->next = s;                         \
     return true;                         \
 }                                        \
-ds(bool) D##Delete##type##Successor(D##_##type##_##Node *p) {              \
-    D##_##type##_##Node *q = p->next;    \
+ds(bool) D##Delete##type##Successor(abbr(D, type, Node,) *p) {               \
+    abbr(D, type, Node,) *q = p->next;   \
     p->next = q->next;                   \
     q->next->prior = p;                  \
     free(q);                             \
